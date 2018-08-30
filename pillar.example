@@ -9,6 +9,10 @@ haproxy:
     #group: 'custom-group'
     # new setting to override configuration file path
     #config_file: /etc/haproxy/haproxy.cfg
+
+    # Set to False to suppress showing changes in config_file (good if you specify passwords in config_file)
+    #config_show_changes: True
+
   enabled: True
   overwrite: True # Overwrite an existing config file if present (default behaviour unless set to false)
   # old setting to override configuration file path, kept for compatibility
@@ -124,7 +128,7 @@ haproxy:
     frontend1:
       name: www-http
       bind: "*:80"
-      redirects: 
+      redirects:
         - scheme https if !{ ssl_fc }
       reqadds:
         - "X-Forwarded-Proto:\\ http"
@@ -152,7 +156,7 @@ haproxy:
     backend1:
       name: www-backend
       balance: roundrobin
-      redirects: 
+      redirects:
         - scheme https if !{ ssl_fc }
       extra: "reqidel ^X-Forwarded-For:"
       servers:
@@ -163,7 +167,7 @@ haproxy:
           check: check
     static-backend:
       balance: roundrobin
-      redirects: 
+      redirects:
         - scheme https if !{ ssl_fc }
       options:
         - http-server-close

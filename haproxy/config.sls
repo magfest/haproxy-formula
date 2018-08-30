@@ -9,6 +9,7 @@ haproxy.config:
    - user: {{ haproxy.user }}
    - group: {{ haproxy.group }}
    - mode: 644
+   - show_changes: {{ haproxy.config_show_changes }}
    - require_in:
      - service: haproxy.service
    - watch_in:
